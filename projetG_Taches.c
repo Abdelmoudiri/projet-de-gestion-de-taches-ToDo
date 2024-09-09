@@ -17,17 +17,18 @@ int main()
     SYSTEMTIME st;
     GetLocalTime(&st);
     Tache taches[100],tem;
+    int x;
     int choix;
     do{
 
-    printf("Choisissez un chiffre :\n");
-    printf("1. Ajouter .\n");
-    printf("2. Afficher .\n");
-    printf("3. Rechercher . \n");
-    printf("4. modifier. \n");
-    printf("5. Supprimer . \n");
-    printf("6. Quitter\n");
-    scanf("%d", &choix);
+        printf("Choisissez un chiffre :\n");
+        printf("1. Ajouter .\n");
+        printf("2. Afficher .\n");
+        printf("3. Rechercher . \n");
+        printf("4. modifier. \n");
+        printf("5. Supprimer . \n");
+        printf("6. Quitter\n");
+        scanf("%d", &choix);
 
     switch(choix) {
         case 1:     printf("Saisir le id du tache : ");
@@ -53,66 +54,103 @@ int main()
                     count++;
                     break;
        case 2 :
-
-             printf("1 : pour tri en alpha  \n2 : pour tri en deadline \n3 : pour tri en deadline est dans 3 jours ou moins ");
-             int choix2;
-             scanf("%d",&choix2);
-             switch(choix2)
-             {
-                 case 1:
-
-                    for(i=0;i<count;i++)
-                    {
-                        for(j=0;j<count-i-1;j++)
-                        {
-                            if(strcmp(taches[j].titre,taches[j+1].titre)>0){
-                                tem=taches[j];
-                                taches[j]=taches[j+1];
-                                taches[j+1]=tem;
+                     printf("1 : pour tri en alpha  \n2 : pour tri en deadline \n3 : pour tri en deadline est dans 3 jours ou moins ");
+                     int choix2;
+                     scanf("%d",&choix2);
+                     switch(choix2)
+                     {
+                         case 1:
+                            for(i=0;i<count;i++)
+                            {
+                                for(j=0;j<count-i-1;j++)
+                                {
+                                    if(strcmp(taches[j].titre,taches[j+1].titre)>0){
+                                        tem=taches[j];
+                                        taches[j]=taches[j+1];
+                                        taches[j+1]=tem;
+                                    }
+                                }
                             }
-                        }
+                            for(i=0;i<count;i++)
+                            {
+                                printf("%d | %s | %s | %d/%d/%d | %d \n",taches[i].id,taches[i].titre,taches[i].description,taches[i].deadline.jour,taches[i].deadline.mois,taches[i].deadline.anne,taches[i].statu);
 
-                    }
-
-                    for(i=0;i<count;i++)
-            {
-                printf("%d | %s | %s | %d/%d/%d | %d \n",taches[i].id,taches[i].titre,taches[i].description,taches[i].deadline.jour,taches[i].deadline.mois,taches[i].deadline.anne,taches[i].statu);
-
-            }
-                 break;
-                 case 2:
-
-                    for(i=0;i<count;i++)
-                    {
-                        for(j=0;j<count-i-1;j++)
-                        {
-                            if(taches[j].deadline.jour > taches[j+1].deadline.jour){
-                                tem=taches[j];
-                                taches[j]=taches[j+1];
-                                taches[j+1]=tem;
                             }
-                        }
+                            break;
+                         case 2:
+                                    for(i=0;i<count;i++)
+                                    {
+                                        for(j=0;j<count-i-1;j++)
+                                        {
+                                            if(taches[j].deadline.jour > taches[j+1].deadline.jour){
+                                                tem=taches[j];
+                                                taches[j]=taches[j+1];
+                                                taches[j+1]=tem;
+                                            }
+                                        }
+                                    }
+                                    for(i=0;i<count;i++)
+                                    {
+                                        printf("%d | %s | %s | %d/%d/%d | %d \n",taches[i].id,taches[i].titre,taches[i].description,taches[i].deadline.jour,taches[i].deadline.mois,taches[count].deadline.anne,taches[i].statu);
+                                    }
+                                    break;
+                            case 3:
+                                    for(i=0;i<count;i++){
+                                    if(st.wDay-taches[i].deadline.jour<=3 && st.wDay-taches[i].deadline.jour>=0)
+                                    printf("%d | %s | %s | %d/%d/%d | %d \n",taches[i].id,taches[i].titre,taches[i].description,taches[i].deadline.jour,taches[i].deadline.mois,taches[i].deadline.anne,taches[i].statu);
+                                    }
+                                    }
+                                    break;
+            case 4:
+                    int choix3;
+                    printf("1 : pour modifier description  \n2 : pour modifier statu \n3 : pour modifier le deadline ");
+                    scanf("%d",&choix3);
+                    switch(choix3){
+                        case 1:
+                                printf("entrer Id tu veux ");
+                                scanf("%d",&x);
+                                for(i=0;i<count;i++){
 
-                    }
-                    for(i=0;i<count;i++)
-            {
-                printf("%d | %s | %s | %d/%d/%d | %d \n",taches[i].id,taches[i].titre,taches[i].description,taches[i].deadline.jour,taches[i].deadline.mois,taches[count].deadline.anne,taches[i].statu);
+                                    if(taches[i].id==x)
+                                    {
+                                        printf("elntrer la nouvelle desciption :");
+                                        scanf(" %[^\n]s",taches[i].description);
+                                        printf("changée avec succes :");
+                                        break;
+                                    }
+                                }
+                                printf(" id introuvable \n ");
+                                break;
+                        case 2:
+                                printf("entrer Id tu veux ");
+                                scanf("%d",&x);
+                                for(i=0;i<count;i++){
 
+                                    if(taches[i].id==x)
+                                    {
+                                        printf("elntrer la nouvelle desciption :");
+                                        scanf("%d",taches[count].statu);
+                                        break;
+                                    }
+                                }
+                                printf(" id introuvable ");
+                                break;
+
+                        case 3:
+                                printf("entrer Id tu veux ");
+                                scanf("%d",&x);
+                                for(i=0;i<count;i++){
+
+                                    if(taches[i].id==x)
+                                    {
+                                        printf("elntrer la nouvelle desciption :");
+                                        scanf("%d",taches[count].deadline.jour);
+                                        break;
+                                    }
+                                }
+                                printf(" id introuvable ");
+                                break;
             }
-
-                 break;
-                 case 3:
-
-                      for(i=0;i<count;i++){
-                if(st.wDay-taches[i].deadline.jour<=3 && st.wDay-taches[i].deadline.jour>=0)
-                printf("%d | %s | %s | %d/%d/%d | %d \n",taches[i].id,taches[i].titre,taches[i].description,taches[i].deadline.jour,taches[i].deadline.mois,taches[i].deadline.anne,taches[i].statu);
-
-            }
-
-                 break;
-            case 4:printf("%d",taches[count].deadline.jour);
-             }
-            break;
     }
      }while(choix!=0);
 

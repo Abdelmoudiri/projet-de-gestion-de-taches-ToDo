@@ -20,8 +20,7 @@ int main()
     GetLocalTime(&st);
     Tache taches[100],tem;
     int x;
-    int choix3;
-    int choix;
+    int choix3,choix4,choix;
     do{
 
         printf("Choisissez un chiffre :\n");
@@ -103,7 +102,50 @@ int main()
                                     printf("%d | %s | %s | %d/%d/%d | %d \n",taches[i].id,taches[i].titre,taches[i].description,taches[i].deadline.jour,taches[i].deadline.mois,taches[i].deadline.anne,taches[i].statu);
                                     }
                                     }
-                                    break;
+                                break;
+            case 3:
+
+                puts("\n\t1. Rechercher avec ID");
+        puts("\t2. Rechercher avec titre");
+        puts("\t3. Retour au menu principal");
+
+        printf("\nEntrer votre choix: ");
+        scanf("%d", &choix4);
+        switch (choix) {
+            case 1:
+                printf("\nentrer le id :");
+                int idd;
+                scanf("%d",&idd);
+                for(i=0;i<count;i++)
+                {
+                    if(taches[i].id==idd)
+                    {
+                        printf("%d | %s | %s | %d/%d/%d | %d \n",taches[i].id,taches[i].titre,taches[i].description,taches[i].deadline.jour,taches[i].deadline.mois,taches[i].deadline.anne,taches[i].statu);
+                        break;
+                    }
+                }
+                break;
+            case 2:
+                printf("\nentrer le titre :");
+                char rr;
+                scanf("%d",&idd);
+                for(i=0;i<count;i++)
+                {
+                    if(strcmp(taches[i].id,rr)==0)
+                    {
+                        printf("%d | %s | %s | %d/%d/%d | %d \n",taches[i].id,taches[i].titre,taches[i].description,taches[i].deadline.jour,taches[i].deadline.mois,taches[i].deadline.anne,taches[i].statu);
+                        break;
+                    }
+                }
+                break;
+            case 3:
+                return; // Retourne au menu principal
+            default:
+                puts("Choix invalid.");
+        }
+
+
+
             case 4:
                     printf("1 : pour modifier description  \n2 : pour modifier statu \n3 : pour modifier le deadline ");
                     scanf("%d",&choix3);

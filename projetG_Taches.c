@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<string.h>
 #include <windows.h>
+#include<stdbool.h>
+bool find=false;
 int i,j,count=0;
 typedef struct{
 int jour,mois;
@@ -18,6 +20,7 @@ int main()
     GetLocalTime(&st);
     Tache taches[100],tem;
     int x;
+    int choix3;
     int choix;
     do{
 
@@ -102,7 +105,6 @@ int main()
                                     }
                                     break;
             case 4:
-                    int choix3;
                     printf("1 : pour modifier description  \n2 : pour modifier statu \n3 : pour modifier le deadline ");
                     scanf("%d",&choix3);
                     switch(choix3){
@@ -116,10 +118,10 @@ int main()
                                         printf("elntrer la nouvelle desciption :");
                                         scanf(" %[^\n]s",taches[i].description);
                                         printf("changée avec succes :");
-                                        break;
+                                        find=true;
                                     }
                                 }
-                                printf(" id introuvable \n ");
+                                if(!find)printf(" id introuvable \n ");
                                 break;
                         case 2:
                                 printf("entrer Id tu veux ");
@@ -128,14 +130,13 @@ int main()
 
                                     if(taches[i].id==x)
                                     {
-                                        printf("elntrer la nouvelle desciption :");
-                                        scanf("%d",taches[count].statu);
-                                        break;
+                                        printf("elntrer la nouvelle statu :");
+                                        scanf("%d",&taches[i].statu);
+                                        find=true;
                                     }
                                 }
-                                printf(" id introuvable ");
+                                 if(find==false)printf(" id introuvable \n ");
                                 break;
-
                         case 3:
                                 printf("entrer Id tu veux ");
                                 scanf("%d",&x);
@@ -143,17 +144,17 @@ int main()
 
                                     if(taches[i].id==x)
                                     {
-                                        printf("elntrer la nouvelle desciption :");
-                                        scanf("%d",taches[count].deadline.jour);
+                                        printf("elntrer la nouvelle dea :");
+                                        scanf("%d",taches[i].deadline.jour);
+                                        find=true;
                                         break;
                                     }
+                                    break;
                                 }
-                                printf(" id introuvable ");
+                                if(!find)printf(" id introuvable \n ");
                                 break;
             }
     }
      }while(choix!=0);
-
-
    return 0;
 }
